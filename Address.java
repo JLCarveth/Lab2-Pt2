@@ -11,4 +11,8 @@ public class Address {
         this.streetNumber = streetNumber;
         this.postalCode = postalCode;
     }
+
+    public String toString() {
+        return streetNumber + street + " St., " + "Postal Code: " + postalCode;
+    }
 }

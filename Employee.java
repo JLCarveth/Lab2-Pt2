@@ -1,4 +1,5 @@
 import java.time.LocalTime;
+import java.lang.IllegalArgumentException;
 
 /**
  * Class representation of an Employee.
@@ -26,30 +27,56 @@ public class Employee {
      */
     private Address[] addresses;
 
-    public Employee(String name, double rate, Address[] addresses) {
+    public Employee(String name, double rate) {
         this.name = name;
         this.rate = rate;
-        this.addresses = addresses;
+        this.addresses = new Address[5];    // Each Employee can have up to 5 Addresses associated with their instance
     }
 
+    /**
+     * @return the instance's String field
+     */
     public String getName() { return name; }
 
+    /**
+     * @param name the new name to set.
+     */
     public void setName(String name) { this.name = name; }
 
     /**
-     * Clocks the hours an employee as worked.
-     * @param a < b, the time they started the shift
-     * @param b > a, the time their shift ended.
+     * @return how many hours the employee has worked.
      */
-    public double clockHours(LocalTime a, LocalTime b) {
-        if (a.compareTo(b) > -1){
-            throw new IllegalArgumentException("A must be less than b.");
-        }
-        int hours = b.getHour() - a.getHour();
-        int mins = b.getMinute() - a.getMinute();
+    public double getHours() { return hours; }
 
-        double worked = hours + (mins / 60);
-        this.hours += worked;
-        return worked;
+    /**
+     * @param hours how many hours the employee has worked.
+     */
+    public void setHours(double hours) { this.hours = hours; }
+
+    /**
+     * @return the rate the employee earns.
+     */
+    public double getRate() { return rate; }
+
+    /**
+     * @param rate the rate to set.
+     */
+    public void setRate(double rate) { this.rate = rate; }
+
+    public Address[] getAddresses() { return addresses; }
+
+    /**
+     * Sets the address at the given index.
+     * @param index 0 < index < 5. The index of the array to set.
+     * @param a the address to set at addresses[index]
+     */
+    public void setAddress(int index, Address a) {
+        if (!(-1 < index && index < 5)) {
+            throw new IllegalArgumentException("Index param "+index+" out of range.");
+        }
+        if (a == null) {
+            throw new IllegalArgumentException("Cannot be null.");
+        }
+        this.addresses[index] = a;
     }
 }
