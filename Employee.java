@@ -1,4 +1,3 @@
-import java.time.LocalTime;
 import java.lang.IllegalArgumentException;
 
 /**
@@ -26,6 +25,11 @@ public class Employee {
      * Any addresses they have
      */
     private Address[] addresses;
+
+    /**
+     * Count of addresses
+     */
+    private int ac = 0;
 
     public Employee(String name, double rate) {
         this.name = name;
@@ -74,9 +78,19 @@ public class Employee {
         if (!(-1 < index && index < 5)) {
             throw new IllegalArgumentException("Index param "+index+" out of range.");
         }
-        if (a == null) {
-            throw new IllegalArgumentException("Cannot be null.");
-        }
         this.addresses[index] = a;
+    }
+
+    /**
+     * Appends a to the end of the address list.
+     * @param a the Address to add.
+     */
+    public void appendAddress(Address a) {
+        if (this.ac == 4) {
+            throw new IllegalStateException("Address array is full.");
+        }
+
+        this.addresses[ac] = a;
+        ac++;
     }
 }
