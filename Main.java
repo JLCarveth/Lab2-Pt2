@@ -7,5 +7,10 @@ public class Main {
         o1.setHours(40);
         o1.setAddress(0, a1);
         o1.setAddress(1, a2);
+
+        // Prints the two addresses, prints null for remaining empty slots.
+        for (Address i : o1.getAddresses()) {
+            System.out.println(i);
+        }
     }
 }
